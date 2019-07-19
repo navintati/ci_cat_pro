@@ -3,6 +3,17 @@
 <body>
     <div class="container">
         <div class="table-wrapper">
+        	<div class="table-title">
+                <div class="row">
+                    <div class="col-sm-12">
+				    	<h3 style="color: red; background: yellow; text-align: center;"> <?php echo $this->session->flashdata('msg_cat_pass'); ?> </h3>
+				    	<h3 style="color: red; background: yellow; text-align: center;"> <?php echo $this->session->flashdata('msg_prod_pass'); ?> </h3>
+				    	<h3 style="color: red; background: yellow; text-align: center;"> <?php echo $this->session->flashdata('msg_cat_fail'); ?> </h3>
+				    	<h3 style="color: red; background: yellow; text-align: center;"> <?php echo $this->session->flashdata('msg_prod_fail'); ?> </h3>
+					</div>
+            	</div>
+        	</div>
+        	<!-- Test -->
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
@@ -15,7 +26,7 @@
                 </div>
             </div>
             <table class="table table-striped table-hover">
-            	<?php if (!empty($prods)) { ?>
+            	<?php if (is_array($prods) && !empty($prods)) { ?>
                 <thead>
                     <tr>
 						<!-- <th>
@@ -34,7 +45,8 @@
                     </tr>
                 </thead>
                 <tbody>
-            		<?php $i = 1; foreach ($prods as $prod) { ?>
+            		<?php $i = 1; 
+            			foreach ($prods as $prod) { ?>
 	                    <tr>
 							<!-- <td>
 								<span class="custom-checkbox">
