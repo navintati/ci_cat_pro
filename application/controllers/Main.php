@@ -68,9 +68,9 @@ class Main extends CI_Controller {
 			$data = array(
 				'category_name' => $this->input->post('catname'),
 				'status' => '0',
-				'created_at' => date('Y-m-d H:i:s', time())
+				'created_at' => NOW()
 			);
-
+			
 			if (!empty($data)) {
 				$form_data = $this->em->putDatas('category',$data);
 				$this->session->set_flashdata('msg_cat_pass', 'Succefully Category Added');

@@ -6,10 +6,10 @@
         	<div class="table-title">
                 <div class="row">
                     <div class="col-sm-12">
-				    	<h3 style="color: red; background: yellow; text-align: center;"> <?php echo $this->session->flashdata('msg_cat_pass'); ?> </h3>
-				    	<h3 style="color: red; background: yellow; text-align: center;"> <?php echo $this->session->flashdata('msg_prod_pass'); ?> </h3>
-				    	<h3 style="color: red; background: yellow; text-align: center;"> <?php echo $this->session->flashdata('msg_cat_fail'); ?> </h3>
-				    	<h3 style="color: red; background: yellow; text-align: center;"> <?php echo $this->session->flashdata('msg_prod_fail'); ?> </h3>
+				    	<h3 style="color: red; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_cat_pass'); ?> </h3>
+				    	<h3 style="color: red; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_prod_pass'); ?> </h3>
+				    	<h3 style="color: red; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_cat_fail'); ?> </h3>
+				    	<h3 style="color: red; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_prod_fail'); ?> </h3>
 					</div>
             	</div>
         	</div>
@@ -41,7 +41,7 @@
 						<th>Description</th>
                         <th>Quentity</th>
                         <th>Created</th>
-                        <!-- <th>Actions</th> -->
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,16 +54,18 @@
 									<label for="checkbox1"></label>
 								</span>
 							</td> -->
-							<td><?= $i; ?></td>
+							<?php if (!empty($prod->prod_name)): ?>
+							<td><?= $i ?></td>
 							<td><?= $prod->category_name ?></td>
 	                        <td><?= $prod->prod_name ?></td>
 	                        <td><?= $prod->prod_desc ?></td>
 	                        <td><?= $prod->prod_quentity ?></td>
-	                        <td><?= $prod->created_at ?></td>
-	                        <!-- <td>
-	                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+	                        <td><?php echo date("d-M-Y", strtotime($prod->created_at)); ?></td>
+	                        <td>
+	                            <a href="#editEmployeeModal" class="edit" id="<?= $prod->prod_id ?>" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 	                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-	                        </td> -->
+	                        </td>
+							<?php endif; ?>
 	                    </tr>
 		            <?php $i++; } } else { ?>
 		            	<tr>
@@ -133,31 +135,37 @@
 	</div>
 
 	<!-- Edit Modal HTML -->
-	<!-- <div id="editEmployeeModal" class="modal fade">
+	<div id="editEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="<?= base_url() ?>" method="post" class="editproduct">
 					<div class="modal-header">						
 						<h4 class="modal-title">Edit Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
 						<div class="form-group">
-							<label>Name</label>
-							<input type="text" class="form-control" required>
+							<label>Category&nbsp;: </label>
+							<!-- <input type="text" name="category" class="form-control" > -->
+								<select name="categorys" class="form-control">
+								    <option selected>Choose...</option>
+								<?php if (count($cates > 0)) { foreach ($cates as $cat) { ?>
+								    <option value="<?= $cat->cat_id ?>"><?= $cat->category_name ?></option>
+								<?php } } ?>
+								</select>
 						</div>
 						<div class="form-group">
-							<label>Email</label>
-							<input type="email" class="form-control" required>
+							<label>Product Name&nbsp;: </label>
+							<input type="text" name="prodname" class="form-control" >
 						</div>
 						<div class="form-group">
-							<label>Address</label>
-							<textarea class="form-control" required></textarea>
+							<label>Description&nbsp;: </label>
+							<textarea class="form-control" name="description" ></textarea>
 						</div>
 						<div class="form-group">
-							<label>Phone</label>
-							<input type="text" class="form-control" required>
-						</div>					
+							<label>Quentity&nbsp;: </label>
+							<input type="text" name="quentity" class="form-control" >
+						</div>				
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -166,7 +174,7 @@
 				</form>
 			</div>
 		</div>
-	</div> -->
+	</div>
 
 	<!-- Delete Modal HTML -->
 	<div id="deleteEmployeeModal" class="modal fade">

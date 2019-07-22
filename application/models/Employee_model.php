@@ -34,9 +34,9 @@ class Employee_model extends CI_Model {
 		// $this->db->join('category', 'cat_id = cat_id');
 		// $query = $this->db->get();
 
-		$query = $this->db->select('p.prod_name, p.prod_desc, p.prod_quentity, p.status, p.created_at, c.category_name, c.status')
+		$query = $this->db->select('p.prod_id, p.prod_name, p.prod_desc, p.prod_quentity, p.status, p.created_at, c.category_name, c.status')
 			     ->from('product as p')
-			     ->join('category as c', 'p.cat_id = c.cat_id', 'RIGHT')
+			     ->join('category as c', 'p.cat_id = c.cat_id', 'LEFT')
 			     ->get();
 
 		if ($query->num_rows() > 0) {
