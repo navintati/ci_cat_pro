@@ -53,5 +53,16 @@ class Employee_model extends CI_Model {
 		// }
 	}
 
+	public function fetchCatCheck($catname)
+	{
+		$query = $this->db->select('category_name')
+	    		 ->from('category')
+	    		 ->where('category_name', $catname)
+	     		 ->get();
+	    $result = $query->result_array();
+	    return $result;
+
+	}
+
 }
 

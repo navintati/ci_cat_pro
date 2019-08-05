@@ -6,10 +6,11 @@
         	<div class="table-title">
                 <div class="row">
                     <div class="col-sm-12">
-				    	<h3 style="color: red; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_cat_pass'); ?> </h3>
-				    	<h3 style="color: red; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_prod_pass'); ?> </h3>
-				    	<h3 style="color: red; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_cat_fail'); ?> </h3>
-				    	<h3 style="color: red; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_prod_fail'); ?> </h3>
+				    	<h3 style="color: #01ac01; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_cat_pass'); ?> </h3>
+				    	<h3 style="color: #01ac01; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_prod_pass'); ?></h3>
+				    	<h3 style="color: #fd1200; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_cat_fail'); ?> </h3>
+				    	<h3 style="color: #fd1200; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_prod_fail'); ?> </h3>
+				    	<h3 style="color: #fd1200; background: #fff; text-align: center;" class='hide-it-msg'> <?php echo $this->session->flashdata('msg_exists'); ?> </h3>
 					</div>
             	</div>
         	</div>

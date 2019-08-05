@@ -63,21 +63,31 @@ class Main extends CI_Controller {
 
 	public function putCat()
 	{
-		// echo "<pre>"; print_r($_POST); echo "</pre>"; die();
 		if (!empty($_POST)) {
-			$data = array(
-				'category_name' => $this->input->post('catname'),
-				'status' => '0',
-				'created_at' => NOW()
-			);
-			
-			if (!empty($data)) {
-				$form_data = $this->em->putDatas('category',$data);
-				$this->session->set_flashdata('msg_cat_pass', 'Succefully Category Added');
+			$catname = $this->input->post('catname');
+			$usercheck = $this->em->fetchCatCheck($catname);
+			$cont = count($usercheck);
+			// echo "<pre>"; print_r($cont); echo "</pre>"; 
+			// echo "<pre>"; print_r($usercheck); echo "</pre>"; die();
+			if ($cont == 1) {
+				$this->session->set_flashdata('msg_exists', $catname . ' Category Exists');
 				redirect(base_url());
 			} else {
-				echo "<h3> Something went wrong !!! </h3>";
+				$data = array(
+				'category_name' => $catname,
+				'status' => '0',
+				);
+					// 'created_at' => NOW()
+				
+				if (!empty($data)) {
+					$form_data = $this->em->putDatas('category',$data);
+					$this->session->set_flashdata('msg_cat_pass', 'Succefully Category Added');
+					redirect(base_url());
+				} else {
+					echo "<h3> Something went wrong !!! </h3>";
+				}
 			}
+			
 		} else {
 			$this->session->set_flashdata('msg_cat_fail', 'Fill the all fields !!!');
 			redirect(base_url());
